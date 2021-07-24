@@ -241,30 +241,34 @@ class _AddnewState extends State<Addnew> {
           )
       ),
       onPressed: () async {
-        dynamic data={
-          "name": name,
-          "number":num,
-          "address":address,
-          "units":units,
-          "type":type,
-          "bg":bg,
-          "condition":condition,
-          "created":FieldValue.serverTimestamp()
-          // DateTime.now().microsecondsSinceEpoch
-        };
 
         if(_formkey.currentState.validate())
         {
           _formkey.currentState.save();
+          dynamic data={
+            "name": name,
+            "number":num,
+            "address":address,
+            "units":units,
+            "type":type,
+            "bg":bg,
+            "condition":condition,
+            // DateTime.now().microsecondsSinceEpoch
+          };
           print(data);
           isloading =true;
           setState(() {
           });
+
           AuthService authService=new AuthService();
           await authService.addPatient(data);
+          // data.putIfAbsent("created", () => FieldValue.serverTimestamp());
+          // await authService.addPatient(data);
           isloading =false;
           setState(() {
           });
+          VxToast.show(context, msg: "Blood Request made Successfully",bgColor: Colors.green);
+          Navigator.pop(context);
         }
       },
     );

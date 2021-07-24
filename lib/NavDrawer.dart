@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:red/Profile.dart';
 import 'package:red/api/auth_services.dart';
 import 'package:velocity_x/velocity_x.dart';
+import 'myRequest.dart';
 
 class NavDrawer extends StatelessWidget {
   final padding=EdgeInsets.symmetric(horizontal: 20,vertical: 20);
@@ -50,7 +51,7 @@ class NavDrawer extends StatelessWidget {
             Divider(color: Colors.red,height: 1,),
             Menuitem(text: "Active Requests",icon: FontAwesomeIcons.creativeCommonsSampling,ontap: (){}),
             Divider(color: Colors.red,height: 1,),
-            Menuitem(text: "My Requests",icon: FontAwesomeIcons.handHoldingWater,ontap: (){}),
+            Menuitem(text: "My Request",icon: FontAwesomeIcons.handHoldingWater,ontap: (){navigate(context, MyRequest());}),
             Divider(color: Colors.red,height: 1,),
             Menuitem(text: "Logout",icon: Icons.power_settings_new,ontap: (){
               _authService.logout();
@@ -64,6 +65,7 @@ class NavDrawer extends StatelessWidget {
       ),
     );
   }
+
   void navigate(BuildContext context,StatefulWidget newpage)
   {
     Navigator.pop(context);

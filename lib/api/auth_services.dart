@@ -82,6 +82,10 @@ class AuthService {
   async {
     await initialize();
     await db.collection("patients").doc(UID).set(data).onError((error, stackTrace) => print(error+"Errrrrrrrrrrrrrrrrrorrrrrrrrrrrrrrrr")).
+    then((value) => print("Reallyyyyyyyyyyy saved data"));
+    await db.collection("patients").doc(UID).update({
+      "created":FieldValue.serverTimestamp()
+    }).onError((error, stackTrace) => print(error+"Errrrrrrrrrrrrrrrrrorrrrrrrrrrrrrrrr")).
     then((value) => print("Reallyyyyyyyyyyy saved"));
   }
   Future<void> initialize()
@@ -89,7 +93,11 @@ class AuthService {
     UID=await _auth.currentUser.uid;
     documentReference= await db.collection('users').doc(UID);
   }
-
+  Future<String> returnUID()
+  async {
+    await initialize();
+    return UID;
+  }
   Future uploadPhotoFirebase(File imgfile)
   async {
     await initialize();
@@ -119,6 +127,22 @@ class AuthService {
           'Error from image repo ${snapshot.state.toString()}');
       throw ('This file is not an image');
     }
+  }
+
+  deleteRequest(context)
+  async {
+    await initialize();
+    await db.collection('patients').doc(UID).delete().then((value) =>
+        VxToast.show(context, msg: "Successfully Deleted",bgColor: Colors.green));
+  }
+  Future<dynamic> myReqStream() async {
+    var data;
+    await initialize();
+    await db.collection("patients").doc(UID).get().then<dynamic>(( DocumentSnapshot snapshot) async{
+      data=snapshot.data();
+      return snapshot;
+    });
+    return data;
   }
 //  Future
 }
