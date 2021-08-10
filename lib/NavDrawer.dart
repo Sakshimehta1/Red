@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:red/Profile.dart';
 import 'package:red/api/auth_services.dart';
+import 'package:red/findDonor.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'myRequest.dart';
 
@@ -49,7 +50,9 @@ class NavDrawer extends StatelessWidget {
             SizedBox(height: 10),
             Menuitem(text: "Profile",icon: FontAwesomeIcons.solidUserCircle,ontap: (){navigate(context, Profile(data));}),
             Divider(color: Colors.red,height: 1,),
-            Menuitem(text: "Active Requests",icon: FontAwesomeIcons.creativeCommonsSampling,ontap: (){}),
+            // Menuitem(text: "Active Requests",icon: FontAwesomeIcons.creativeCommonsSampling,ontap: (){}),
+            // Divider(color: Colors.red,height: 1,),
+            Menuitem(text: "Find Donor",icon: Icons.search,ontap: (){navigate(context, FindDonor());}),
             Divider(color: Colors.red,height: 1,),
             Menuitem(text: "My Request",icon: FontAwesomeIcons.handHoldingWater,ontap: (){navigate(context, MyRequest());}),
             Divider(color: Colors.red,height: 1,),
